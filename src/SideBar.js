@@ -275,7 +275,7 @@ function SideBar({ people, onSelectPerson, setPersonId }) {
         {filteredUser.map((person) => (
           <div
             key={person.id}
-            className={`flex items-center p-2 cursor-pointer ${activeId === person.id ? 'bg-gray-200' : ''}`}
+            className={`flex items-center p-2 cursor-pointer ${activeId === person.id ? 'bg-gray-200  border-r-4 border-blue-600' : ''}`}
             onClick={() => handleSelectPerson(person)}
           >
             <img

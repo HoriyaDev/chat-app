@@ -34,28 +34,28 @@
 //   //   setOpenStates(newOpenStates);
 //   //   const daelete  = selectedPerson[personId]
 //   //   console.log("🚀 ~ handleDelete ~ daelete:", daelete)
-    
+
 //   // };
 
 //   // const handleDelete = (index) => {
-   
+
 //   //   const newArray = itemsArray.filter((_, i) => i !== index);
 //   //   setItemsArray(newArray);
-  
-    
+
+
 //   //   const newOpenStates = openStates.filter((_, i) => i !== index);
 //   //   setOpenStates(newOpenStates);
-  
-    
+
+
 //   //   // const storedPerson = JSON.parse(localStorage.getItem(`person-${selectedPerson.id}`));
 //   //   // if (storedPerson) {
-     
+
 //   //   //   const updatedChat = storedPerson.chat.filter((_, i) => i !== index);
-  
-     
+
+
 //   //   //   const updatedPerson = { ...storedPerson, chat: updatedChat };
 //   //   //   localStorage.setItem(`person-${selectedPerson.id}`, JSON.stringify(updatedPerson));
-  
+
 //   //   //   console.log("🚀 ~ handleDelete ~ updatedPerson:", updatedPerson);
 //   //   // }
 
@@ -65,39 +65,39 @@
 //   //     if(getData){
 //   //       const updatedData = getData.chat.filter((item , i ) =>i!==index)
 //   //       const deletedMsg = {...getData , chat: updatedData}
-     
+
 //   //       localStorage.setItem(`person-${selectedPerson.id}` , deletedMsg)
-       
+
 //   //       console.log("🚀 ~ handleDelete ~ daeletedMsg:", deletedMsg)
 
 //   //     }
 
-      
+
 
 //   // };
 
 //   const handleDelete = (index) => {
 //     const newArray = itemsArray.filter((_, i) => i !== index);
 //     setItemsArray(newArray);
-  
+
 //     const newOpenStates = openStates.filter((_, i) => i !== index);
 //     setOpenStates(newOpenStates);
-  
+
 //     const storedData = localStorage.getItem(`person-${selectedPerson.id}`);
 //     const getData = JSON.parse(storedData);
-  
+
 //     if (getData) {
 //       const updatedData = getData.chat.filter((_, i) => i !== index);
 //       const deletedMsg = { ...getData, chat: updatedData };
-  
+
 //       // Convert `deletedMsg` to JSON string before storing
 //       localStorage.setItem(`person-${selectedPerson.id}`, JSON.stringify(deletedMsg));
-  
+
 //       console.log("🚀 ~ handleDelete ~ deletedMsg:", deletedMsg);
 //     }
 //   };
-  
-  
+
+
 
 //   const handleEdit = (index) => {
 //     setInputValue(itemsArray[index]);
@@ -299,8 +299,8 @@ function Body({ selectedPerson, people, personId }) {
     setInputValue(itemsArray[index].text);
     setEditIndex(index);
 
-    
-    
+
+
 
   };
 
@@ -327,8 +327,8 @@ function Body({ selectedPerson, people, personId }) {
   //         console.log("🚀 ~ addItems ~ editedData:", editedData)
   //       }
 
-      
-        
+
+
 
   //     } else {
   //       const newItem = {
@@ -370,24 +370,24 @@ function Body({ selectedPerson, people, personId }) {
         const updatedArray = [...itemsArray];
         updatedArray[editIndex].text = inputValue;
         setItemsArray(updatedArray);
-  
+
         // Reset the editIndex to null after editing
         setEditIndex(null);
-  
+
         // Retrieve the current data for the selected person from localStorage
         const getData = localStorage.getItem(`person-${selectedPerson.id}`);
         const storedData = JSON.parse(getData);
-  
+
         if (storedData) {
           // Update the specific message in the localStorage chat array
           storedData.chat[editIndex].text = inputValue;
-  
+
           // Save the updated data back to localStorage
           localStorage.setItem(
             `person-${selectedPerson.id}`,
             JSON.stringify(storedData)
           );
-  
+
           console.log("🚀 ~ addItems ~ editedData:", storedData);
         }
       } else {
@@ -397,27 +397,27 @@ function Body({ selectedPerson, people, personId }) {
           timestamp: new Date().toLocaleString(),
           src: selectedPerson.imgSrc,
         };
-  
+
         // Add the new item to the itemsArray and update state
         const newItemsArray = [...itemsArray, newItem];
         setItemsArray(newItemsArray);
-  
+
         // Update chat data for the selected person in localStorage
         const updatedPerson = {
           ...selectedPerson,
           chat: newItemsArray,
         };
-  
+
         localStorage.setItem(
           `person-${selectedPerson.id}`,
           JSON.stringify(updatedPerson)
         );
         console.log("Updated person data:", updatedPerson);
       }
-  
+
       // Clear the input field
       setInputValue("");
-  
+
       // Scroll to the bottom of the chat view
       setTimeout(() => {
         document.getElementById("scroll-bottom").scrollIntoView({
@@ -426,7 +426,6 @@ function Body({ selectedPerson, people, personId }) {
       }, 0);
     }
   };
-  
 
   return (
     <div className="max-h-svh overflow-x-hidden overflow-y-auto">
@@ -443,47 +442,67 @@ function Body({ selectedPerson, people, personId }) {
         ) : (
           <h1 className="text-white ml-4">Select a person to chat</h1>
         )}
-
+  
         <div className="flex justify-end items-center w-[70%] fixed">
           <IoCall size={25} className="text-white" />
           <IoVideocam size={25} className="text-white ml-10" />
         </div>
       </div>
-
+  
       {/* Display messages */}
       <ul className="flex-grow mt-20">
         <div className="mt-20">
           {itemsArray.map((message, index) => (
-            <div
+              
+              <><div
               key={index}
-              className={`mb-2 p-3 ml-10 mr-10 mob:m-5 tab:m-5 bg-slate-200 rounded-md max-w-fit mob:max-w-[97%] lg:max-w-[600px] ${
-                index % 2 === 0
-                  ? "float-left clear-both"
-                  : "float-right clear-both bg-red-400"
-              }`}
-            >
-              <div className="flex items-center">
-                <img
-                  src={message?.src}
-                  alt="Message visual"
-                  className="w-10 h-10 object-cover rounded-full"
-                />
-                <div className="ml-2">
-                  <p className="text-xs">
-                    {new Date(message?.timestamp).toLocaleTimeString()}
-                  </p>
-                  <p className="p-2 rounded-md">{message?.text}</p>
-                </div>
-              </div>
-              <button onClick={() => handleDelete(index)}>Delete</button>
-              <button onClick={() => handleEdit(index)}>Edit</button>
+              className={`mb-2 p-3 mr-10 mob:m-5 tab:m-5 bg-slate-200 rounded-md max-w-fit mob:max-w-[97%] lg:max-w-[600px] ${index % 2 === 0
+                ? "float-left clear-both"
+                : "float-right clear-both bg-red-400"}`}
+            >   
+            <div className={`text-red-700 ${index % 2 === 0 ? "float-left mr-2" : "float-right ml-2"}`}>
+              <button onClick={() => { handleClick(index); } }>
+                <PiDotsThreeOutlineVerticalFill />
+              </button>
             </div>
+
+
+                <div className="flex items-center">
+                  <img
+                    src={message?.src}
+                    alt="Message visual"
+                    className="w-10 h-10 object-cover rounded-full" />
+                  <div className="ml-2">
+                    <p className="text-xs">
+                      {new Date(message?.timestamp).toLocaleTimeString()}
+                    </p>
+                    <p className="p-2 rounded-md">{message?.text}</p>
+                  </div>
+                </div>
+
+                {openStates[index] && (
+                  <div className="bg-slate-300 flex flex-col absolute z-20">
+                    <button
+                      className="font-bold py-2 px-4 rounded text-black"
+                      onClick={() => handleDelete(index)}
+                    >
+                      Remove
+                    </button>
+                    <button
+                      className="font-bold py-2 px-4 rounded text-black"
+                      onClick={() => handleEdit(index)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                )}
+              </div></>
           ))}
         </div>
-
+  
         <div id="scroll-bottom" className="mb-14"></div>
       </ul>
-
+  
       <div className="flex mb-0 absolute bottom-0 w-[73%]">
         <input
           type="text"
@@ -501,7 +520,7 @@ function Body({ selectedPerson, people, personId }) {
       </div>
     </div>
   );
-}
+}  
 
 export default Body;
 
