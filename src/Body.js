@@ -460,7 +460,7 @@ function Body({ selectedPerson, people, personId }) {
                 ? "float-left clear-both"
                 : "float-right clear-both bg-red-400"}`}
             >   
-            <div className={`text-red-700 ${index % 2 === 0 ? "float-left mr-2" : "float-right ml-2"}`}>
+            <div className={` ${index % 2 === 0 ? "float-right " : "float-left "}`}>
               <button onClick={() => { handleClick(index); } }>
                 <PiDotsThreeOutlineVerticalFill />
               </button>
@@ -503,12 +503,12 @@ function Body({ selectedPerson, people, personId }) {
         <div id="scroll-bottom" className="mb-14"></div>
       </ul>
   
-      <div className="flex mb-0 absolute bottom-0 w-[73%]">
+      <div className="flex mb-0  mob:w-full absolute bottom-0 w-[73%]">
         <input
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          className="p-2 w-full border-2 rounded-md"
+          className="p-2 w-full  border-2 rounded-md"
           placeholder="Type a message"
         />
         <button
