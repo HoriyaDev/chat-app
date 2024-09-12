@@ -285,7 +285,7 @@ function SideBar({ people, onSelectPerson, setPersonId }) {
             />
             <div className="flex flex-col ml-3">
             <p className="ml-2 font-bold">{person.name}</p>
-            <p>{person.text}</p>
+            <p>{person.text}</p> <p>{person.text}</p>
               </div>
           </div>
         ))}
